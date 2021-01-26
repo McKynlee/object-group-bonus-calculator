@@ -44,31 +44,52 @@ console.log(employees);
 
 function employeeLog(array) {
   for (let i = 0; i < array.length; i++) {
-    console.log(array[i]);
+    console.log(createNewEmployee(array[i]));
   }
 }
 
 function createNewEmployee(employeeObject) {
+  let employeeBonus = Number(calculateBonus(employeeObject));
+  let BonusPercentage = Number(employeeBonus / employeeObject.annualSalary);
   let newEmployee = {
     name: employeeObject.name,
-    bonusPercentage: employeeObject.reviewRating, // add bonus percentage
-    totalCompensation: employeeObject.reviewRating, // add total compensation
-    totalBonus: employeeObject.reviewRating, // add total bonus
+    bonusPercentage: BonusPercentage, // add bonus percentage
+    totalCompensation:
+      Number(employeeObject.annualSalary) + Number(employeeBonus), // add total compensation
+    totalBonus: employeeBonus, // add total bonus
   };
-
   return newEmployee;
 }
 
-function calculateBonus() {
+function calculateBonus(employee) {
   let bonus = 0;
-  if (employees.reviewRating === 5) {
-    bonus = 0.1 * employees.annualSalary;
-  } else if (employees.reviewRating === 4) {
-    bonus = 0.06 * employees.annualSalary;
-  } else if (employees.reviewRating === 3) {
-    bonus = 0.04 * employees.annualSalary;
+  let bonusPercentage = 0;
+  if (employee.reviewRating === 5) {
+    bonusPercentage = 0.1;
+    bonus = bonusPercentage * employee.annualSalary;
+  } else if (employee.reviewRating === 4) {
+    bonusPercentage = 0.06;
+    bonus = bonusPercentage * employee.annualSalary;
+  } else if (employee.reviewRating === 3) {
+    bonusPercentage = 0.04;
+    bonus = bonusPercentage * employee.annualSalary;
   }
-  return bonus;
+  if (employee.employeeNumber.length === 4) {
+    bonusPercentage += 0.05;
+    bonus *= 1.05;
+  }
+  if (employee.annualSalary >= 65000) {
+    bonusPercentage -= 0.01;
+    bonus *= 0.99;
+  }
+  if (bonusPercentage > 0.13) {
+    bonus = 0.13;
+  }
+  if (bonusPercentage < 0) {
+    bonus = 0;
+  }
+  return Number(bonus);
 }
 
-console.log(employees[0].employeeNumber.length);
+console.log(calculateBonus(employees[0]));
+console.log(employeeLog(employees));
