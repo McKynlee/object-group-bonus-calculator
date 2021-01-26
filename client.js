@@ -3,32 +3,32 @@ const employees = [
     name: 'Atticus',
     employeeNumber: '2405',
     annualSalary: '47000',
-    reviewRating: 3
+    reviewRating: 3,
   },
   {
     name: 'Jem',
     employeeNumber: '62347',
     annualSalary: '63500',
-    reviewRating: 4
+    reviewRating: 4,
   },
   {
     name: 'Scout',
     employeeNumber: '6243',
     annualSalary: '74750',
-    reviewRating: 5
+    reviewRating: 5,
   },
   {
     name: 'Robert',
     employeeNumber: '26835',
     annualSalary: '66000',
-    reviewRating: 1
+    reviewRating: 1,
   },
   {
     name: 'Mayella',
     employeeNumber: '89068',
     annualSalary: '35000',
-    reviewRating: 1
-  }
+    reviewRating: 1,
+  },
 ];
 
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
@@ -40,4 +40,33 @@ const employees = [
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
-console.log( employees );
+console.log(employees);
+
+function employeeLog(array) {
+  for (let i = 0; i < array.length; i++) {
+    console.log(array[i]);
+  }
+}
+
+function createNewEmployee(employeeObject) {
+  let newEmployee = {
+    name: employeeObject.name,
+    bonusPercentage: employeeObject.reviewRating, // add bonus percentage
+    totalCompensation: employeeObject.reviewRating, // add total compensation
+    totalBonus: employeeObject.reviewRating, // add total bonus
+  };
+
+  return newEmployee;
+}
+
+function calculateBonus() {
+  let bonus = 0;
+  if (employees.reviewRating === 5) {
+    bonus = 0.1 * employees.annualSalary;
+  } else if (employees.reviewRating === 4) {
+    bonus = 0.06 * employees.annualSalary;
+  } else if (employees.reviewRating === 3) {
+    bonus = 0.04 * employees.annualSalary;
+  }
+  return bonus;
+}
