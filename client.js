@@ -70,3 +70,5 @@ function calculateBonus() {
   }
   return bonus;
 }
+
+console.log(employees[0].employeeNumber.length);
